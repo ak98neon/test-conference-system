@@ -29,6 +29,18 @@ spring:
     open-in-view: false
   jmx:
     enabled: false
+  web:
+    resources:
+      static-locations: classpath:/static/, classpath:/api/spec/
+
+springdoc:
+  packages-to-scan: com.redhash.conference.adaptors.api
+  swagger-ui:
+    urls:
+      - url: /v1/openapi.yml
+        name: static
+      - url: /v3/api-docs.yaml
+        name: generated
 
 conference-system:
   jokes-url: "https://api.chucknorris.io/"
