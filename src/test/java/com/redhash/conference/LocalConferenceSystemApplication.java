@@ -1,13 +1,14 @@
 package com.redhash.conference;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 
-@SpringBootTest
-class ConferenceSystemApplicationTests {
+class LocalConferenceSystemApplication {
 
-    @Test
-    void contextLoads() {
+    public static void main(String[] args) {
+        new SpringApplicationBuilder(ConferenceSystemApplication.class)
+                .initializers(new StandaloneApplicationContextInitializer())
+                .profiles("dev")
+                .run(args);
     }
 
 }

@@ -1,1 +1,34 @@
+server:
+  port: 8080
+  servlet:
+    jsp:
+      registered: false
+  tomcat:
+    max-connections: 30
+    threads:
+      max: 30
+  compression:
+    enabled: true
+    min-response-size: 512
+    mime-types: text/html,text/xml,text/plain,text/css,application/json
 
+spring:
+  application:
+    name: test-conference-system
+  datasource:
+    url: jdbc:postgresql://localhost/conference
+    username:
+    password:
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      minimum-idle: 1
+      maximum-pool-size: 10
+      connection-test-query: SELECT 1
+      pool-name: conference-db-cp
+  jpa:
+    open-in-view: false
+  jmx:
+    enabled: false
+
+conference-system:
+  jokes-url: "https://api.chucknorris.io/"
