@@ -1,0 +1,18 @@
+{
+  "groupId": "com.redhash.conference",
+  "artifactId":	"api-spring-server",
+  "artifactDescription": "Conference API server implementation with Spring MVC",
+  "artifactVersion": "0.1.0",
+  "basePackage": "com.redhash.conference",
+  "apiPackage":	"com.redhash.conference.adaptors.api",
+  "modelPackage": "com.redhash.conference.adaptors.api.dto",
+  "configPackage":	"com.redhash.conference.config",
+  "invokerPackage":	"com.redhash.conference",
+  "library": "spring-boot",
+  "documentationProvider": "springdoc",
+  "singleContentTypes": true,
+  "legacyDiscriminatorBehavior": false,
+  "performBeanValidation": true,
+  "interfaceOnly": true,
+  "skipDefaultInterface": true
+}

@@ -1,0 +1,184 @@
+openapi: 3.0.3
+info:
+  title: Conference Test Api
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Local server
+paths:
+  /api/v1/conferences:
+    post:
+      tags:
+        - conferences
+      summary: Create New Conference
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewConference'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConferenceDto'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetail'
+        '409':
+          description: Duplicate Conference (not unique name)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetail'
+  /api/v1/conferences/{conferenceId}:
+    put:
+      tags:
+        - conferences
+      summary: Update Conference
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateConference'
+      parameters:
+        - name: conferenceId
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConferenceDto'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetail'
+        '409':
+          description: Duplicate Conference (not unique name)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetail'
+    delete:
+      tags:
+        - conferences
+      summary: Delete Conference
+      parameters:
+        - name: conferenceId
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetail'
+    get:
+      tags:
+        - conferences
+      summary: Get Conference By Id
+      parameters:
+        - name: conferenceId
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConferenceDto'
+components:
+  schemas:
+    ConferenceDto:
+      type: object
+      description: Conference domain object
+      required:
+        - name
+        - description
+      properties:
+        name:
+          type: string
+          description: Conference Name
+          minLength: 4
+          maxLength: 100
+        description:
+          type: string
+          description: Description of new conference
+          minLength: 5
+          maxLength: 500
+    NewConference:
+      type: object
+      description: New Conference Request
+      required:
+        - name
+        - description
+      properties:
+        name:
+          type: string
+          description: Conference Name (Unique)
+          minLength: 4
+          maxLength: 100
+        description:
+          type: string
+          description: Description of new conference
+          minLength: 5
+          maxLength: 500
+    UpdateConference:
+      type: object
+      description: Update Conference Request
+      required:
+        - name
+        - description
+      properties:
+        name:
+          type: string
+          description: Conference Name (Unique)
+          minLength: 4
+          maxLength: 100
+        description:
+          type: string
+          description: Description of new conference
+          minLength: 5
+          maxLength: 500
+    ProblemDetail:
+      type: object
+      description: Problem presentation
+      required:
+        - type
+        - detail
+        - statusCode
+        - title
+      properties:
+        type:
+          type: string
+          description: Type of problem (possible link to detailed description)
+        detail:
+          type: string
+          description: Problem Details
+        statusCode:
+          type: number
+          description: status statusCode
+        title:
+          type: string
+          description: Title of problem
